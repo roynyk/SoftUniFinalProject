@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan Online</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header img {
+            height: 70px;
+        }
+
+        /* Navigation Menu */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            color: #007BFF;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+        .hero img {
+            width: 100%;
+            height: 610px;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .hero-text h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .hero-text p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            background: #007BFF;
+            color: white;
+            padding: 10px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .hero-text p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <img src="{% static 'images/logo parfume.png' %}" alt="Perpustakaan">
+    <nav>
+<ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#rooms">Man Parfume</a></li>
+    <li><a href="#rooms">Woman Parfume</a></li>
+    <li><a href="#contact">Our Contact</a></li>
+    <li><a href="{% url 'perfume_list' %}">List Parfume</a></li>
+    {% if user.is_authenticated %}
+    <li>
+        <a href="{% url 'profile' %}" class="btn btn-secondary">Profile</a>
+    </li>
+    <li>
+        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </li>
+    {% else %}
+    <li>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+            Login
+        </button>
+    </li>
+    {% endif %}
+</ul>
+</nav>
+</header>
+
+<!-- Hero Section -->
+<div class="hero">
+    <img src="{% static 'images/background.webp' %}" alt="Library Banner">
+    <div class="hero-text">
+        <h1>WELCOME TO PARFUME STORE</h1>
+        <p>HOLLA FELLAS</p>
+    </div>
+</div>
+
+
+<!-- Login Modal -->
+<div class="modal fade {% if messages %}show{% endif %}" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" 
+{% if messages %}style="display: block;"{% endif %} data-bs-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+   <div class="modal-content">
+       <div class="modal-header">
+           <h5 class="modal-title" id="loginModalLabel">Login</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
+       </div>
+       <div class="modal-body">
+           {% for message in messages %}
+               <div class="alert alert-danger" id="messages">{{ message }}</div>
+           {% endfor %}
+           <form method="post" action="{% url 'login' %}">
+               {% csrf_token %}
+               <div class="mb-3">
+                   <label for="username" class="form-label">Username</label>
+                   <input type="text" class="form-control" id="username" name="username" required>
+               </div>
+               <div class="mb-3">
+                   <label for="password" class="form-label">Password</label>
+                   <input type="password" class="form-control" id="password" name="password" required>
+                   <small id="passwordHelp" class="form-text text-muted">
+                       <a href="{% url 'register' %}">Register here</a>
+                   </small>
+               </div>
+               <button type="submit" class="btn btn-primary">Login</button>
+           </form>
+       </div>
+   </div>
+</div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Toko Parfum Roy. All Rights Reserved.</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function closeModal() {
+    const modal = document.getElementById('loginModal');
+    const bootstrapModal = bootstrap.Modal.getInstance(modal); // Dapatkan instance modal
+    if (bootstrapModal) {
+        bootstrapModal.hide(); // Sembunyikan modal
+    } else {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+    }
+}
+
+// Agar modal tetap terbuka jika ada pesan error
+document.addEventListener('DOMContentLoaded', () => {
+    const hasMessages = document.querySelectorAll('#messages').length > 0;
+    if (hasMessages) {
+        const modal = new bootstrap.Modal(document.getElementById('loginModal'));
+        modal.show();
+    }
+});
+</script>
+
+</body>
+</html>
