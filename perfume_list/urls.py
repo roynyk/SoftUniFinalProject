@@ -8,4 +8,5 @@ urlpatterns = [
     path('add_perfume/', views.add_perfume, name='add_perfume'),
     path('edit_perfume/<int:perfume_id>/', views.edit_perfume, name='edit_perfume'),
     path('delete_perfume/<int:perfume_id>/', views.delete_perfume, name='delete_perfume'),
+    path('add-to-payment/<int:perfume_id>/', views.add_to_payment, name='add_to_payment'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

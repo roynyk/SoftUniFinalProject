@@ -109,7 +109,7 @@
     <li><a href="#about">About Us</a></li>
     <li><a href="#rooms">Man Parfume</a></li>
     <li><a href="#rooms">Woman Parfume</a></li>
-    <li><a href="#contact">Our Contact</a></li>
+    <li><a href="{% url 'payment_list' %}">Payment</a></li>
     <li><a href="{% url 'perfume_list' %}">List Parfume</a></li>
     {% if user.is_authenticated %}
     <li>

@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'kerangka',
     'perfume_list',
+    'Payment',
+    'Riwayat_transaksi',
 ]
 
 MIDDLEWARE = [

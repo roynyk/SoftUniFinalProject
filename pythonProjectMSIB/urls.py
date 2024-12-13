@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('kerangka.urls')),
     path('perfume/',include('perfume_list.urls')),
+    path('payment/',include('Payment.urls')),
+    path('riwayat-transaksi/', include('Riwayat_transaksi.urls')),
 ]
 
 if settings.DEBUG:
