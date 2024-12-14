@@ -5,15 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaction History</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f7f6;
+            color: #333;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #b0854e;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table thead {
+            background-color: #b0854e;
+            color: #fff;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f3e8db;
+        }
+
+        .table tfoot {
+            background-color: #f9f7f6;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #b0854e;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .back-button:hover {
+            background-color: #8b6b3d;
+        }
+
+        .text-center {
+            margin-bottom: 20px;
+        }
+
+        tfoot td {
+            font-size: 1.1rem;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Transaction History</h1>
+
         {% if transactions %}
             <table class="table table-striped mt-4">
                 <thead>
                     <tr>
                         <th>Date</th>
+                        <th>User</th>
+                        <th>Payment Method</th>
+                        <th>Brand</th>
                         <th>Perfume</th>
                         <th>Quantity</th>
                         <th>Total Price</th>
@@ -23,15 +89,29 @@
                     {% for transaction in transactions %}
                         <tr>
                             <td>{{ transaction.date }}</td>
+                            <td>{{ transaction.user.username }}</td>
+                            <td>{{ transaction.payment_method }}</td>
+                            <td>{{ transaction.perfume.brand }}</td>
                             <td>{{ transaction.perfume.name }}</td>
                             <td>{{ transaction.quantity }}</td>
-                            <td>${{ transaction.total_price }}</td>
+                            <td>Rp{{ transaction.total_price }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" class="text-end fw-bold">Total Price</td>
+                        <td class="fw-bold">
+                            Rp{{ total_price|floatformat:0 }}.00
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
+            <div class="text-center">
+                <a href="{% url 'home' %}" class="back-button">Back</a>
+            </div>
         {% else %}
-            <p class="text-center">No transactions found.</p>
+            <p class="text-center mt-4">No transactions found.</p>
         {% endif %}
     </div>
 </body>

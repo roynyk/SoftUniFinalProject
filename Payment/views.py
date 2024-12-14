@@ -1,17 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Payment, Perfume
+from .models import Payment
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.contrib import messages
 from django.db import transaction
-from .forms import PaymentForm  # Impor PaymentForm
+from .forms import PaymentForm  
 
 @login_required
 def payment_list(request):
     payments = Payment.objects.filter(user=request.user)
 
     if not payments.exists():
-        return HttpResponse("Tidak ada pembayaran yang ditemukan.", status=404)
+        return render(request, 'payment/payment_list.html', {'payments': None, 'total_payment': 0})
 
     total_payment = sum(payment.total_price for payment in payments)
     return render(request, 'payment/payment_list.html', {'payments': payments, 'total_payment': total_payment})

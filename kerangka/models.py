@@ -1,14 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Order(models.Model):
-    # Tambahkan field sesuai kebutuhan
-    customer = models.CharField(max_length=100)
-    product = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.customer
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
