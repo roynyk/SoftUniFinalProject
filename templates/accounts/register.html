@@ -14,57 +14,82 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            background: #7abecc !important;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
         }
 
         .user_card {
-            width: 350px;
-            margin-top: auto;
-            margin-bottom: auto;
-            background: #74cfbf;
+            width: 400px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
             position: relative;
             display: flex;
             justify-content: center;
             flex-direction: column;
-            padding: 10px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #form-title {
+            color: #f4d03f;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         .form_container {
             margin-top: 20px;
         }
 
-        #form-title {
+        .login_btn {
+            width: 100%;
+            background: #f4d03f;
+            color: #333;
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .login_btn:hover {
+            background: #d4af37;
             color: #fff;
         }
 
-        .login_btn {
-            width: 100%;
-            background: #33ccff !important;
-            color: white !important;
-        }
-
-        .login_btn:focus {
-            box-shadow: none !important;
-            outline: 0px !important;
-        }
-
         .input-group-text {
-            background: #f7ba5b !important;
-            color: white !important;
-            border: 0 !important;
-            border-radius: 0.25rem 0 0 0.25rem !important;
+            background: #f4d03f;
+            color: #333;
+            border: none;
+            font-weight: bold;
         }
 
-        ::placeholder {
-            color: #999;
-            opacity: 1;
+        .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
         }
 
-        input:focus {
-            border-color: #33ccff;
-            box-shadow: 0 0 5px rgba(51, 204, 255, 0.5);
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-control:focus {
+            border-color: #f4d03f;
+            box-shadow: 0 0 10px rgba(244, 208, 63, 0.8);
+        }
+
+        .links a {
+            color: #f4d03f;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .links a:hover {
+            color: #d4af37;
         }
     </style>
 </head>
@@ -83,25 +108,25 @@
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" name="username" class="form-control" placeholder="Username.." required>
+                            <input type="text" name="username" class="form-control" placeholder="Username" required>
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
-                            <input type="email" name="email" class="form-control" placeholder="Email.." required>
-                        </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input type="password" name="password1" class="form-control" placeholder="Enter password..." required>
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="password2" class="form-control" placeholder="Re-enter Password..." required>
+                            <input type="password" name="password1" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" name="password2" class="form-control" placeholder="Confirm Password" required>
                         </div>
                         <div class="d-flex justify-content-center mt-3 login_container">
                             <input class="btn login_btn" type="submit" value="Register Account">

@@ -26,6 +26,7 @@ urlpatterns = [
     path('perfume/',include('perfume_list.urls')),
     path('payment/',include('Payment.urls')),
     path('riwayat-transaksi/', include('Riwayat_transaksi.urls')),
+    path('feedback/', include('feedback.urls')),
 ]
 
 if settings.DEBUG:

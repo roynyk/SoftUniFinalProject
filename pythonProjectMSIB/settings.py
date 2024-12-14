@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'perfume_list',
     'Payment',
     'Riwayat_transaksi',
+    'feedback',
 ]
 
 MIDDLEWARE = [
