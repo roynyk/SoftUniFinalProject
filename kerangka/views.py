@@ -1,5 +1,4 @@
-from django.shortcuts import render,HttpResponse, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 from kerangka.forms import CreateUserForm
 import logging
 from .forms import EditProfileForm
@@ -31,7 +30,6 @@ def registerPage(request):
     context = {'form' :form}
     return render(request, 'accounts/register.html', context)
 
-
 def loginPage(request):
 
     if request.method == 'POST':
@@ -42,41 +40,13 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
+            messages.success(request, f"Welcome back, {user.username}!")
             return redirect('home')
         else:
             messages.info(request, 'Username or password incorrect')
 
     context = {}
     return render(request, 'home.html', context)
-
-def profilePage(request):
-    if not request.user.is_authenticated:
-        messages.info(request, "You need to log in to view your profile.")
-        return redirect('login')
-
-    context = {
-        'user': request.user
-    }
-    return render(request, 'accounts/profile.html', context)
-
-def logoutUser(request):
-    logout(request)
-    messages.success(request, "You have successfully logged out.")
-    return redirect('home')
-
-
-def registerPage(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Account created successfully!')
-            return redirect('login')  # Redirect ke login setelah registrasi sukses
-    else:
-        form = UserCreationForm()
-
-    context = {'form': form}
-    return render(request, 'accounts/register.html', context)
 
 def profilePage(request):
     if not request.user.is_authenticated:

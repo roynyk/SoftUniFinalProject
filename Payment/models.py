@@ -6,8 +6,8 @@ from perfume_list.models import Perfume
 class Payment(models.Model):
     PAYMENT_METHOD_CHOICES = [
         ('Cash', 'Cash'),
-        ('Credit', 'Credit'),
-        ('Dompet Digital', 'Dompet Digital'),
+        ('Qris', 'Qris'),
+        ('Transfer Dana', 'Transfer Dana'),
     ]
 
     user = models.ForeignKey(

@@ -5,7 +5,6 @@ from Payment.models import Payment
 from django.contrib.auth.decorators import login_required
 from perfume_list.models import Perfume
 from django.db import transaction
-from django.http import HttpResponseBadRequest
 
 
 def perfume_list(request):
@@ -13,7 +12,7 @@ def perfume_list(request):
     context = {'perfumes': perfumes}
     return render(request, 'perfume/perfume_list.html', context)
 
-
+@login_required
 def add_perfume(request):
     if request.method == 'POST':
         form = PerfumeForm(request.POST, request.FILES)
@@ -26,7 +25,7 @@ def add_perfume(request):
     context = {'form': form}
     return render(request, 'perfume/add_perfume.html', context)
 
-
+@login_required
 def edit_perfume(request, perfume_id):
     perfume = get_object_or_404(Perfume, id=perfume_id)
     
@@ -41,6 +40,7 @@ def edit_perfume(request, perfume_id):
     context = {'form': form, 'perfume': perfume}
     return render(request, 'perfume/edit_perfume.html', context)
 
+@login_required
 def delete_perfume(request, perfume_id):
     perfume = get_object_or_404(Perfume, id=perfume_id)
     
