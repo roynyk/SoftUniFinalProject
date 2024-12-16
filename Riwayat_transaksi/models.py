@@ -6,8 +6,8 @@ from django.utils.timezone import now
 class TransactionHistory(models.Model):
     PAYMENT_METHOD_CHOICES = [
         ('Cash', 'Cash'),
-        ('Qris', 'Qris'),
-        ('Transfer Dana', 'Transfer Dana'),
+        ('Cek', 'Cek'),
+        ('Giro', 'Giro'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)

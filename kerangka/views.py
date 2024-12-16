@@ -40,7 +40,6 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, f"Welcome back, {user.username}!")
             return redirect('home')
         else:
             messages.info(request, 'Username or password incorrect')
@@ -97,7 +96,7 @@ def update_user_profile(request):
             user_form.save()
             password_form.save()
             update_session_auth_hash(request, password_form.user)
-            return redirect('update_profile')
+            return redirect('profile')
         else:
             messages.error(request, 'Terjadi kesalahan. Silakan periksa form Anda.')
     else:

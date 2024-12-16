@@ -2,7 +2,8 @@ from django.contrib import admin
 from .models import Perfume
 
 class PerfumeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'brand', 'price', 'stock')  # Sesuaikan dengan field pada model Perfume
+    list_display = ('name', 'brand', 'price', 'stock')
+    list_filter = ('brand', 'price') 
+    search_fields = ('name', 'brand') 
 
-# Daftarkan model bersama class admin-nya
 admin.site.register(Perfume, PerfumeAdmin)

@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Payment
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.db import transaction
 from .forms import PaymentForm  
 

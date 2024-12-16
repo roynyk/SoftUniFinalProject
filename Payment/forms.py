@@ -4,6 +4,6 @@ from .models import Payment
 class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = ['perfume', 'quantity', 'payment_method']  # Hanya field yang dapat diedit
+        fields = ['perfume', 'quantity', 'payment_method'] 
 
 

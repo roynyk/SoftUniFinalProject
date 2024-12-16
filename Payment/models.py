@@ -1,13 +1,12 @@
 from django.db import models
 from django.conf import settings
-from django.utils.timezone import now
 from perfume_list.models import Perfume
 
 class Payment(models.Model):
     PAYMENT_METHOD_CHOICES = [
         ('Cash', 'Cash'),
-        ('Qris', 'Qris'),
-        ('Transfer Dana', 'Transfer Dana'),
+        ('Cek', 'Cek'),
+        ('Giro', 'Giro'),
     ]
 
     user = models.ForeignKey(
@@ -20,7 +19,7 @@ class Payment(models.Model):
         on_delete=models.CASCADE,
         related_name='perfume_payments'
     )
-    quantity = models.PositiveIntegerField(default=1)  # Pastikan nilai positif
+    quantity = models.PositiveIntegerField(default=1) 
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     payment_method = models.CharField(
         max_length=20,
