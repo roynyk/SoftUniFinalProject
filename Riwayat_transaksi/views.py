@@ -41,7 +41,12 @@ def complete_order(request):
 def transaction_history(request):
     transactions = TransactionHistory.objects.filter(user=request.user).order_by('-id')
     total_price = transactions.aggregate(total_price=models.Sum('total_price'))['total_price'] or 0
+
+    has_transactions = transactions.exists()
+
     return render(request, 'riwayat_transaksi/transaction_history.html', {
         'transactions': transactions,
-        'total_price': total_price
+        'total_price': total_price,
+        'has_transactions': has_transactions,  # Kirim flag ke template
     })
+
