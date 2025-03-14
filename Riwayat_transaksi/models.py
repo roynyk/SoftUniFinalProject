@@ -8,6 +8,7 @@ class TransactionHistory(models.Model):
         ('Cash', 'Cash'),
         ('Cek', 'Cek'),
         ('Giro', 'Giro'),
+        ('Tunai', 'Tunai'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
